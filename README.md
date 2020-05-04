@@ -15,13 +15,17 @@ $ open https://cmake.org/
 
 ## Tutorial
 
+Set up environment variables
+
 ```ShellSession
-# Setting username
+# Set up github username
 $ export GITHUB_USERNAME=<имя_пользователя>
 ```
 
+Set up workspace environment
+
 ```ShellSession
-# Pushing directory name into command line stack
+# Push directory name into command line stack
 $ cd ${GITHUB_USERNAME}/workspace
 $ pushd .
 ~/thedraftaccount/workspace ~/thedraftaccount/workspace
@@ -30,8 +34,10 @@ $ pushd .
 $ source scripts/activate
 ```
 
+Get fork from tp-labs-lab02 repository named tp-labs-lab03
+
 ```ShellSession
-$ git clone https://github.com/${GITHUB_USERNAME}/lab02.git projects/lab03 // Getting repository into local folder
+$ git clone https://github.com/${GITHUB_USERNAME}/lab02.git projects/lab03 # Getting repository into local folder
 Cloning into 'projects/lab03'...
 remote: Enumerating objects: 16, done.
 remote: Counting objects: 100% (16/16), done.
@@ -39,11 +45,13 @@ remote: Compressing objects: 100% (12/12), done.
 remote: Total 16 (delta 1), reused 10 (delta 0), pack-reused 0
 Unpacking objects: 100% (16/16), done.
 
-$ cd projects/lab03
+$ cd projects/lab03#get into repo
 
-$ git remote remove origin // Remove remote server
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab03.git // Adding origin server
+$ git remote remove origin # Remove remote server
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab03.git # Adding origin server address
 ```
+
+Compile and launch example1 manually
 
 ```ShellSession
 # Compilation print.cpp file
@@ -71,6 +79,8 @@ $ g++ example1.o print.a -o example1
 # Looking at the example1 file
 $ ./example1 && echo
 ```
+
+Compile and launch example2 manually
 
 ```ShellSession
 # # Compilation example2.cpp file
@@ -107,6 +117,7 @@ $ ./example2
 $ cat log.txt && echo
 hallo
 ```
+Delete all objective and executable files
 
 ```ShellSession
 # Removing of most files
@@ -116,6 +127,8 @@ $ rm -rf example1 example2
 $ rm -rf log.txt
 ```
 
+Update CMakeLists.txt
+
 ```ShellSession
 # Writing into CMakeLists
 $ cat > CMakeLists.txt <<EOF
@@ -123,6 +136,7 @@ cmake_minimum_required(VERSION 3.4)
 project(print)
 EOF
 ```
+Update CMakeLists.txt
 
 ```ShellSession
 # Writing into CMakeLists
@@ -132,6 +146,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 EOF
 ```
 
+Update CMakeLists.txt
+
 ```ShellSession
 # Writing into CMakeLists
 $ cat >> CMakeLists.txt <<EOF
@@ -140,11 +156,13 @@ EOF
 ```
 
 ```ShellSession
-# Writing into CMakeLists
+# Writing into CMakeLists by new dirs
 $ cat >> CMakeLists.txt <<EOF
 include_directories(\${CMAKE_CURRENT_SOURCE_DIR}/include)
 EOF
 ```
+
+Build example via Cmake
 
 ```ShellSession
 #Building of a programm
@@ -174,6 +192,8 @@ Scanning dependencies of target print
 [100%] Built target print
 ```
 
+Update CMakeLists.txt by new executable files
+
 ```ShellSession
 # Writing into CMakeLists
 $ cat >> CMakeLists.txt <<EOF
@@ -183,6 +203,8 @@ add_executable(example2 \${CMAKE_CURRENT_SOURCE_DIR}/examples/example2.cpp)
 EOF
 ```
 
+Update CMakeLists.txt by new targets
+
 ```ShellSession
 # Writing into CMakeLists
 $ cat >> CMakeLists.txt <<EOF
@@ -191,6 +213,8 @@ target_link_libraries(example1 print)
 target_link_libraries(example2 print)
 EOF
 ```
+
+Reconfigure and build updated project
 
 ```ShellSession
 $ cmake --build _build //Building of a programm
@@ -220,8 +244,10 @@ $ cmake --build _build --target example2
 
 ```
 
+Check building correctness
+
 ```ShellSession
-$ ls -la _build/libprint.a //Getting files content
+$ ls -la _build/libprint.a #Getting files content
 -rw-r--r-- 1 johnsnow johnsnow 3134 апр 19 14:20 _build/libprint.a
 
 $ _build/example1 && echo
@@ -231,6 +257,8 @@ $ cat log.txt && echo
 hello
 $ rm -rf log.txt
 ```
+
+Update CMakeLists.txt a little bit
 
 ```ShellSession
 $ git clone https://github.com/tp-labs/lab03 tmp //Cloning repo
@@ -246,6 +274,8 @@ $ mv -f tmp/CMakeLists.txt .
 # removing folders
 $ rm -rf tmp
 ```
+
+Yo thats how CMakeLists.txt looks right now
 
 ```ShellSession
 $ cat CMakeLists.txt // Show CMakeLists.txt
@@ -290,7 +320,11 @@ $ cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/johnsnow/thedraftaccount/workspace/projects/lab03/_build
+```
 
+Build install project
+
+```
 $ cmake --build _build --target install
 [100%] Built target print
 Install the project...
